@@ -1,38 +1,57 @@
-// alert(gon.data);
-
 $(document).ready(function(){
-      NProgress.start();
+  NProgress.start();
 
-    $.getJSON('http://www.highcharts.com/samples/data/jsonp.php?filename=aapl-c.json&callback=?', function (data)    {
-        // Create the chart
-        
-        var dataObject = {
-            rangeSelector: {
-                selected: 1,
-            },
-            
-            title: {
-                text: 'AAPL Stock Price'
-            },
-            
-            series: [{
-                name: 'AAPL',
-                data: data,
-                tooltip: {
-                    valueDecimals: 2
-                }
-            }]
-            
-            ,
-            
-            chart: {
-                renderTo: 'bitcoin'
-            }
-            
-        };
-        
-         var chart = new Highcharts.StockChart(dataObject);   
-        var chart = $('#container').highcharts('StockChart', dataObject);
+  $('#ethbtn').click(function(){
+    $('#bitcoin').html("");
+  });
+  $('#ethb').click(function(){
+    $('#bitcoin').html("");
+  });
+
+    Highcharts.chart('bitcoin', {
+      title: {
+        text: 'BTC vs ETH Chart'
+      },
+
+      subtitle: {
+        text: 'Source: Charts for last 7 days'
+      },
+
+      yAxis: {
+        title: {
+            text: 'Price USD',
+        },
+        min: -1000,
+        max: 4000
+      },
+      xAxis: {
+        title: {
+          text: 'Time'
+        },
+          type: 'datetime',
+        },
+        legend: {
+          layout: 'vertical',
+          align: 'right',
+          verticalAlign: 'middle'
+        },
+        series : [{    
+          name : 'BTC - USD',
+          data: gon.data,
+  //      pointStart: Date.UTC(byear, bmnth-1, bdate),
+          pointStart: Date.UTC(2012, 2, 6),
+          pointInterval: 1000 * 60 * 60 * 24
+        },{
+          name : 'ETH - USD',
+          lineColor: '#FF0000',
+          lineWidth: 1,
+          data: gon.eth_data ,
+          pointStart: Date.UTC(2012, 2, 6),
+          pointInterval: 1000 * 60 * 60 * 24
+        }]
     });
-    NProgress.remove();
+
+  Nprogress.done();
+  NProgress.remove();
+
 });

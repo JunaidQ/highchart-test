@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
-  get 'chart/index'
+  get 'charts', to: "charts#index"
 
-  get 'eth', to: "chart#ethereum"
-  get 'bit', to: "chart#bitcoin"
+  get 'eth', to: "charts#ethereum"
+  get 'bit', to: "charts#bitcoin"
 
-  root to: 'chart#index'
+  root to: 'charts#index'
   
 end
