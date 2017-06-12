@@ -1,0 +1,55 @@
+<div id="bitcoin"></div>
+<div id="ethereum"></div>
+
+<%= link_to 'Bitcoin', bit_path ,class: "btn btn-primary", id: "ethbtn" %>
+<%= link_to 'ETH vs BTC', charts_path, class: "btn btn-default", id: "ethbt"  %>
+<%= link_to 'Ethereum', eth_path, class: "btn btn-info", id: "ethb"  %>
+
+<br>
+<div id="chart-container" style="height: 500px; min-width: 500px"></div>
+<script type="text/javascript">
+  NProgress.start();
+
+
+  Highcharts.chart('bitcoin', {
+
+    title: {
+        text: 'BTC vs ETH Chart'
+    },
+
+    subtitle: {
+        text: 'Source: Charts for last 7 days'
+    },
+
+    yAxis: {
+        title: {
+            text: 'Price USD',
+        },
+        min: -1000,
+        max: 4000
+    },
+    xAxis: {
+        title: {
+            text: 'Time'
+        },
+        type: 'datetime',
+    },
+    legend: {
+        layout: 'vertical',
+        align: 'right',
+        verticalAlign: 'middle'
+    },
+    series : [{    
+            name : 'BTC - USD',
+            data: <%= @data %> ,
+      //      pointStart: Date.UTC(byear, bmnth-1, bdate),
+            pointStart: Date.UTC(2012, 2, 6),
+    		pointInterval: 1000 * 60 * 60 * 24
+    	
+        }]
+});
+
+Nprogress.done();
+NProgress.remove();
+
+</script>
