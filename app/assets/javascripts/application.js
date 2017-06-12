@@ -17,7 +17,10 @@
 //= require highcharts/highcharts-more
 //= require highcharts/themes/dark-green
 //= require highstock
+//= require highstock/adapters/standalone-framework
 //= require highstock/modules/data
 //= require highstock/themes/dark-unica
 //= require bootstrap-sprockets
+//= require nprogress
+//= require nprogress-turbolinks
 //= require_tree .

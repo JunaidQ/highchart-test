@@ -20,6 +20,11 @@ gem 'pry'
 gem 'coinbase'
 gem 'bootstrap-sass'
 gem 'twitter-bootstrap-rails'
+gem 'gon'
+gem 'highstocks-rails'
+gem 'nprogress-rails'
+
+
 
 group :development, :test do
   gem 'byebug', platform: :mri

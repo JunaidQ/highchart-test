@@ -4,10 +4,13 @@ class ChartController < ApplicationController
   require 'json'
   require 'coinbase/wallet'
  
-
   def index
-    @example = 1
+    bitcoin
+    ethereum
+    # binding.pry
+  end
 
+  def bitcoin
     client = Coinbase::Wallet::Client.new(api_key: '51xT9CrkutVJOaA1', api_secret: 'Eb3f67B21qqwJiyTYvxWuFcZqN7TyxfH')
     price = client.spot_price({currency_pair: 'BTC-USD'})
     currencies = client.currencies
@@ -30,7 +33,6 @@ class ChartController < ApplicationController
     end
   end
 
-
   def ethereum
     url = 'https://etherchain.org/api/statistics/price'
     uri = URI(url)
@@ -49,7 +51,7 @@ class ChartController < ApplicationController
 
     @eth_data_array = eth_data.map{|x| [x["time"],x["usd"]] }
     @eth_array = eth_data.map{|x| x["usd"] }
-
+    gon.data = @eth_array
     respond_to do |format|
       format.html
       format.js
