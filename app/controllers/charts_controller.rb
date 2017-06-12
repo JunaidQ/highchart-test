@@ -7,24 +7,19 @@ class ChartsController < ApplicationController
   def index
     bitcoin
     ethereum
-    # binding.pry
   end
 
   def bitcoin
     client = Coinbase::Wallet::Client.new(api_key: ENV['APIKEY'], api_secret: ENV['APISECRET'])
-    price = client.spot_price({currency_pair: 'BTC-USD'})
-    currencies = client.currencies
 
     @data_array = []
     rate_usd = []
-    usd_date = ['2017-06-02(UTC)','2017-06-03(UTC)','2017-06-04(UTC)','2017-06-05(UTC)',
-      '2017-06-06(UTC)','2017-06-07(UTC)','2017-06-08(UTC)']
 
-    usd_date.each do |date|
+    CURRENCY_DATE.each do |date|
       rate_usd << client.spot_price({currency: 'USD', date: date})  
     end
     
-    @data_array = rate_usd.each_with_index.map{ |value,index|[DateTime.parse(usd_date[index]).strftime("%Y-%m-%d"),value['amount'].to_f] }
+    @data_array = rate_usd.each_with_index.map{ |value,index|[DateTime.parse(CURRENCY_DATE[index]).strftime("%Y-%m-%d"),value['amount'].to_f] }
     @data = rate_usd.each_with_index.map{ |value,index| value['amount'].to_f }
 
     gon.data = @data
@@ -38,14 +33,14 @@ class ChartsController < ApplicationController
     url = 'https://etherchain.org/api/statistics/price'
     uri = URI(url)
     response = Net::HTTP.get(uri)
-    a = JSON.parse(response)
+    response_data = JSON.parse(response)
     eth_data = []
     
-    a["data"].each do |f|
-      t = Time.parse(f["time"])
-      d = Date.parse(f["time"])
+    response_data["data"].each do |f|
+      time = Time.parse(f["time"])
+      date = Date.parse(f["time"])
 
-      if d.month == 8 && d.day.between?(3,9) && t.hour == 5 
+      if date.month == 8 && date.day.between?(3,9) && time.hour == 5 
         eth_data << f 
       end
     end
