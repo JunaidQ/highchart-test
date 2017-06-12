@@ -11,7 +11,7 @@ class ChartsController < ApplicationController
   end
 
   def bitcoin
-    client = Coinbase::Wallet::Client.new(api_key: '51xT9CrkutVJOaA1', api_secret: 'Eb3f67B21qqwJiyTYvxWuFcZqN7TyxfH')
+    client = Coinbase::Wallet::Client.new(api_key: ENV['APIKEY'], api_secret: ENV['APISECRET'])
     price = client.spot_price({currency_pair: 'BTC-USD'})
     currencies = client.currencies
 
