@@ -1,9 +1,9 @@
 <div id="bitcoin"></div>
 <div id="ethereum"></div>
 
-<%= link_to 'Bitcoin', bit_path ,class: "btn btn-primary", id: "ethbtn" %>
-<%= link_to 'ETH vs BTC', charts_path, class: "btn btn-default", id: "ethbt"  %>
-<%= link_to 'Ethereum', eth_path, class: "btn btn-info", id: "ethb"  %>
+<%= link_to 'Bitcoin', bit_path ,class: "btn btn-primary", id: "ethbtn", remote: true %>
+<%= link_to 'ETH vs BTC', charts_path, class: "btn btn-default", id: "ethbt", remote: true  %>
+<%= link_to 'Ethereum', eth_path, class: "btn btn-info", id: "ethb", remote: true  %>
 
 <br>
 <div id="chart-container" style="height: 500px; min-width: 500px"></div>
@@ -58,5 +58,7 @@ series : [{
 
     }]
  });
-Nprogress.done();
+NProgress.done();
+NProgress.remove();
+
 </script>
